@@ -15,4 +15,12 @@ function getComputerChoice() {
     }
 }
 
-console.log(getComputerChoice());
+function getHumanChoice() {
+    let choice;
+    while ((choice != "rock") && (choice != "scissors") && (choice != "paper")) {
+        choice = prompt("Enter your choice: 'rock', 'paper' or 'scissors'");
+    }
+    return choice
+}
+
+console.log(getHumanChoice());
