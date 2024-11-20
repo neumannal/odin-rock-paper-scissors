@@ -26,4 +26,26 @@ function getHumanChoice() {
     return choice
 }
 
-console.log(getHumanChoice());
+function checkWinner(humanChoice, computerChoice) {
+    if (humanChoice === computerChoice) {
+        return "draw";
+    } else if (
+        (humanChoice === "rock" && computerChoice === "scissors") ||
+        (humanChoice === "scissors" && computerChoice === "paper") ||
+        (humanChoice === "paper" && computerChoice === "rock")
+    ) {
+        return "human";
+    } else {
+        return "computer";
+    }
+}
+
+function playRound(humanChoice, computerChoice) {
+    let winner = checkWinner(humanChoice, computerChoice);
+
+}
+
+let choice1 = getComputerChoice();
+let choice2 = getComputerChoice();
+let decision = checkWinner(choice1, choice2);
+console.log(choice1, choice2, decision);
