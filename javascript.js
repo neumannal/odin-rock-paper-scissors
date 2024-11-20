@@ -45,6 +45,8 @@ function playRound(humanChoice, computerChoice) {
 
     if (winner === "draw") {
         console.log(`draw! both selected ${humanChoice}`);
+        computerScore += 0.5;
+        humanScore += 0.5;
     } else if (winner === "computer") {
         console.log(`you lose! ${computerChoice} beats ${humanChoice}`);
         computerScore += 1;
@@ -54,8 +56,15 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-let choice1 = getHumanChoice();
-let choice2 = getComputerChoice();
-console.log(choice1, choice2);
-playRound(choice1, choice2);
-console.log(humanScore, computerScore);
+function playGame() {
+    // play five rounds
+    for (let i=0; i<5; i++) {
+        let choice1 = getHumanChoice();
+        let choice2 = getComputerChoice();
+        playRound(choice1, choice2);
+        console.log(`current score is you: ${humanScore} --- computer: ${computerScore}`);
+    }
+    console.log("game over");
+}
+
+playGame();
