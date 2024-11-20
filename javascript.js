@@ -43,9 +43,19 @@ function checkWinner(humanChoice, computerChoice) {
 function playRound(humanChoice, computerChoice) {
     let winner = checkWinner(humanChoice, computerChoice);
 
+    if (winner === "draw") {
+        console.log(`draw! both selected ${humanChoice}`);
+    } else if (winner === "computer") {
+        console.log(`you lose! ${computerChoice} beats ${humanChoice}`);
+        computerScore += 1;
+    } else {
+        console.log(`you win! ${humanChoice} beats ${computerChoice}`);
+        humanScore += 1;
+    }
 }
 
-let choice1 = getComputerChoice();
+let choice1 = getHumanChoice();
 let choice2 = getComputerChoice();
-let decision = checkWinner(choice1, choice2);
-console.log(choice1, choice2, decision);
+console.log(choice1, choice2);
+playRound(choice1, choice2);
+console.log(humanScore, computerScore);
