@@ -44,22 +44,30 @@ function playRound(humanChoice, computerChoice) {
     let winner = checkWinner(humanChoice, computerChoice);
 
     if (winner === "draw") {
-        console.log(`draw! both selected ${humanChoice}`);
         computerScore += 0.5;
         humanScore += 0.5;
+        return `draw! both selected ${humanChoice}`;
     } else if (winner === "computer") {
-        console.log(`you lose! ${computerChoice} beats ${humanChoice}`);
         computerScore += 1;
+        return `you lose! ${computerChoice} beats ${humanChoice}`;
     } else {
-        console.log(`you win! ${humanChoice} beats ${computerChoice}`);
         humanScore += 1;
+        return `you win! ${humanChoice} beats ${computerChoice}`;
     }
 }
 
 function playGame(humanChoice) {
-    let computerChoice = getComputerChoice();
-    playRound(humanChoice, computerChoice);
-    console.log(`current score is you: ${humanScore} --- computer: ${computerScore}`);
+    const computerChoice = getComputerChoice();
+    const resultText = playRound(humanChoice, computerChoice);
+    
+    const scoreText = `current score is you: ${humanScore} --- computer: ${computerScore}`;
+    const resultContainer = document.querySelector("#result-container");
+    resultParagraph = document.createElement("p");
+    scoreParagraph = document.createElement("p");
+    resultParagraph.textContent = resultText;
+    scoreParagraph.textContent = scoreText;
+    resultContainer.insertBefore(scoreParagraph, resultContainer.firstChild)
+    resultContainer.insertBefore(resultParagraph, resultContainer.firstChild);
 }
 
 function buttonClick (event) {
