@@ -56,15 +56,26 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-function playGame() {
-    // play five rounds
-    for (let i=0; i<5; i++) {
-        let choice1 = getHumanChoice();
-        let choice2 = getComputerChoice();
-        playRound(choice1, choice2);
-        console.log(`current score is you: ${humanScore} --- computer: ${computerScore}`);
-    }
-    console.log("game over");
+function playGame(humanChoice) {
+    let computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
+    console.log(`current score is you: ${humanScore} --- computer: ${computerScore}`);
 }
 
-playGame();
+function buttonClick (event) {
+    let target = event.target;
+    switch(target.id) {
+        case "rock":
+            playGame("rock");
+            break;
+        case "paper":
+            playGame("paper");
+            break;
+        case "scissors":
+            playGame("scissors");
+            break;
+    }
+}
+
+const buttonContainer = document.querySelector("#button-container");
+buttonContainer.addEventListener("click", buttonClick)
