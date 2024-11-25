@@ -44,8 +44,6 @@ function playRound(humanChoice, computerChoice) {
     let winner = checkWinner(humanChoice, computerChoice);
 
     if (winner === "draw") {
-        computerScore += 0.5;
-        humanScore += 0.5;
         return `draw! both selected ${humanChoice}`;
     } else if (winner === "computer") {
         computerScore += 1;
@@ -57,17 +55,34 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function playGame(humanChoice) {
+    const resultContainer = document.querySelector("#result-container");
+
+    // reset game if score >= 5
+    if ((computerScore >= 5) || (humanScore >= 5)) {
+        resultContainer.replaceChildren();
+        computerScore = 0;
+        humanScore = 0;
+    }
+
     const computerChoice = getComputerChoice();
     const resultText = playRound(humanChoice, computerChoice);
     
     const scoreText = `current score is you: ${humanScore} --- computer: ${computerScore}`;
-    const resultContainer = document.querySelector("#result-container");
     resultParagraph = document.createElement("p");
     scoreParagraph = document.createElement("p");
     resultParagraph.textContent = resultText;
     scoreParagraph.textContent = scoreText;
     resultContainer.insertBefore(scoreParagraph, resultContainer.firstChild)
     resultContainer.insertBefore(resultParagraph, resultContainer.firstChild);
+
+    const gameOverParagraph = document.createElement("h2");
+    if (humanScore >= 5) {
+        gameOverParagraph.textContent = "GAME OVER --- YOU WIN!"
+        resultContainer.insertBefore(gameOverParagraph, resultContainer.firstChild)
+    } else if (computerScore >= 5) {
+        gameOverParagraph.textContent = "GAME OVER --- YOU LOSE!"
+        resultContainer.insertBefore(gameOverParagraph, resultContainer.firstChild)
+    }
 }
 
 function buttonClick (event) {
